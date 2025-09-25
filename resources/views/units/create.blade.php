@@ -16,6 +16,7 @@
                     <label for="name">Unit Name</label>
                     <input type="text" name="name" class="form-control" required>
                 </div>
+                
                 <div class="form-group">
                     <label for="status">Status</label>
                     <select name="status" class="form-control">

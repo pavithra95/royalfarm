@@ -322,6 +322,14 @@ return [
                     'text' => 'Unit',
                     'url' => 'units',
                 ],
+                [
+                    'text' => 'Variant',
+                    'url' => 'variants',
+                ],
+                [
+                    'text' => 'Tax',
+                    'url' => 'taxes',
+                ],
             ],
         ],
        

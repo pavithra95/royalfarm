@@ -787,7 +787,7 @@ class ProductController extends Controller
             }
 
         }
-       Review::where('product_id',$product->id)->delete();
+    //    Review::where('product_id',$product->id)->delete();
         $product->delete();
         // return redirect()->back();
         return response()->json([

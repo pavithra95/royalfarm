@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Http\Request;
 
@@ -26,5 +27,10 @@ class HomeController extends Controller
     {
         $products = Product::all();
         return view('front.home', compact('products'));
+    }
+    public function allProducts()
+    {
+        $categories = Category::with('products')->get();
+        return view('front.all_products', compact('categories'));
     }
 }

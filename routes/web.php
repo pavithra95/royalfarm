@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\VariantController;
 use Illuminate\Support\Facades\Route;
 
@@ -19,3 +21,7 @@ Route::resource('taxes', App\Http\Controllers\TaxController::class);
 
 Route::get('/get-attributesValue/{attributeId}', [VariantController::class, 'attributesValue']);
 Route::post('/get-variant-details', [VariantController::class, 'getVariantDetails']);
+Route::get('/products/{id}/delete', [ProductController::class, 'delete']);
+Route::get('/all-products', [HomeController::class, 'allProducts']);
+
+

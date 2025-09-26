@@ -239,27 +239,7 @@
 </head>
 <body>
   <!-- Header & Nav -->
-  <header>
-    <div class="logo">
-      <img src="Assets/logo.png" alt="Logo" />
-      
-    </div>
-    <div class="search-container">
-      <input
-        type="text"
-        id="searchInput"
-        placeholder="Search products..."
-        oninput="filterProducts()"
-      />
-    </div>
-    <nav class="nav-links">
-      <a href="#">Home</a>
-      <a href="#meat">Meat</a>
-      <a href="#milk">Milk</a>
-      <a href="#products" onclick="scrollToProducts(event)">Products</a>
-      <a href="#contact">Contact</a>
-    </nav>
-  </header>
+  @include('front.header')
 
   <!-- Hero Section -->
   <section class="hero">
@@ -292,11 +272,11 @@
       <div class="product-card" data-type="meat" data-title="{{ $product->product_name }}">
         <img src="{{ asset('images/product_images/' . $product->featured_image) }}" alt="{{ $product->product_name }}" />
         <div class="product-title">{{ $product->product_name }}</div>
-        <div class="product-type">Meat</div>
+        <div class="product-type">{{$product->category->name}}</div>
         @if($product->variant_type == 'simple')
-        <div class="product-price">₹{{ $product->s_price }}/{{$product->Sunit->name}}</div>
+        <div class="product-price">AED {{ $product->s_price }}/{{$product->s_weight}} {{$product->Sunit->name}}</div>
         @else
-        <div class="product-price">From ₹{{ $product->Productvariants->min('price') }}/{{$product->unit->name}}</div>
+        <div class="product-price">From AED {{ $product->Productvariants->min('price') }}/{{ $product->Productvariants->min('weight') }}  </div>
         @endif
         <button class="add-cart-btn">Add to Cart</button>
       </div>
@@ -305,15 +285,7 @@
     </div>
   </section>
 
-  <!-- Contact/Other Footer Section (Simple) -->
-  <section
-    id="contact"
-    style="text-align: center; padding: 40px 4vw 28px 4vw; font-size: 1.12em; color: #555"
-  >
-    <b>Contact Us:</b> info@royalfresh.com | +91-1234-567-890 <br />
-    <small>© 2025 Royal Fresh. All rights reserved.</small>
-  </section>
-
+  @include('front.footer')
   <script>
     // Scroll to products section
     function scrollToProducts(e) {

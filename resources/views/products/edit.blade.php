@@ -649,7 +649,7 @@ document.addEventListener("DOMContentLoaded", function () {
             contentType: false,
             success: function(response) {
                 console.log('Form submitted successfully:', response);
-                window.location.href = '/get-products';
+                window.location.href = '/products';
             },
             error: function(xhr, status, error) {
                 if (xhr.responseJSON && xhr.responseJSON.errors) {

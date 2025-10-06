@@ -24,4 +24,7 @@ Route::post('/get-variant-details', [VariantController::class, 'getVariantDetail
 Route::get('/products/{id}/delete', [ProductController::class, 'delete']);
 Route::get('/all-products', [HomeController::class, 'allProducts']);
 
+Route::get('/filter-products', [ProductController::class, 'filter'])->name('filter.products');
+
+
 

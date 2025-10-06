@@ -857,6 +857,54 @@ public function updatePosition(Request $request)
 }
 
 
+// app/Http/Controllers/ProductController.php
+public function filter(Request $request)
+{
+    $categories = Category::with(['products' => function($q) use ($request) {
+        // Apply price filter
+       if ($request->min_price && $request->max_price) {
+     $min = $request->min_price ?? 0;        // if min not given → 0
+    $max = $request->max_price ?? PHP_INT_MAX; // if max not given → very large number
+
+    $q->where(function($query) use ($min, $max) {
+        // simple products
+        $query->where(function($sq) use ($min, $max) {
+            $sq->where('variant_type', 'simple')
+               ->whereBetween('s_price', [$min, $max]);
+        });
+
+        // variable products (at least one variant matches)
+        $query->orWhere(function($vq) use ($min, $max) {
+            $vq->where('variant_type', '!=', 'simple')
+               ->whereHas('Productvariants', function($pv) use ($min, $max) {
+                   $pv->whereBetween('price', [$min, $max]);
+               });
+        });
+    });
+}
+
+
+        // Apply rating filter
+        if ($request->rating) {
+            $q->where('rating', '>=', $request->rating);
+        }
+    }]);
+
+    // Filter categories if selected
+    if ($request->categories) {
+        $categories->whereIn('id', $request->categories);
+    }
+
+    $categories = $categories->get();
+
+    return response()->json([
+        'html' => view('front.partials.products', compact('categories'))->render()
+    ]);
+}
+
+
+
+
 
 
    }
